@@ -1,0 +1,32 @@
+name: CI
+
+on:
+  push:
+    branches: ["**"]
+  pull_request:
+    branches: ["**"]
+
+jobs:
+  test:
+    name: Run tests
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python 3.12
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Install dependencies
+        run: pip install pytest
+
+      - name: Run tests
+        # On main the starter tests are all @pytest.mark.skip and the solution/
+        # directory does not exist, so skip this step entirely on main.
+        if: github.ref != 'refs/heads/main'
+        run: |
+          pytest -v
+          pytest solution/tests -v
