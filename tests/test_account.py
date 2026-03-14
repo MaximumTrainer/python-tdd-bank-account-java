@@ -11,13 +11,11 @@ from bank.account import Account, TransactionType
 
 
 class TestDeposit:
-    @pytest.mark.skip(reason="not yet implemented")
     def test_deposit_increases_balance(self) -> None:
         account = Account()
         account.deposit(100)
         assert account.balance() == 100
 
-    @pytest.mark.skip(reason="not yet implemented")
     def test_multiple_deposits_accumulate(self) -> None:
         account = Account()
         account.deposit(100)

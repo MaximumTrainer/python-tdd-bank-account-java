@@ -27,7 +27,9 @@ class Account:
         self._transactions: List[Transaction] = []
 
     def deposit(self, amount: float) -> None:
-        raise NotImplementedError
+        if amount <= 0:
+            raise ValueError("Deposit amount must be positive.")
+        self._transactions.append(Transaction(amount, TransactionType.DEPOSIT))
 
     def withdraw(self, amount: float) -> None:
         raise NotImplementedError
@@ -36,7 +38,13 @@ class Account:
         raise NotImplementedError
 
     def balance(self) -> float:
-        raise NotImplementedError
+        total = 0.0
+        for t in self._transactions:
+            if t.transaction_type == TransactionType.DEPOSIT:
+                total += t.amount
+            else:
+                total -= t.amount
+        return total
 
     def balance_slip(self) -> str:
         raise NotImplementedError
