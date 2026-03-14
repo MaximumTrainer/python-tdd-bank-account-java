@@ -24,14 +24,12 @@ class TestDeposit:
 
 
 class TestWithdraw:
-    @pytest.mark.skip(reason="not yet implemented")
     def test_withdrawal_decreases_balance(self) -> None:
         account = Account()
         account.deposit(100)
         account.withdraw(40)
         assert account.balance() == 60
 
-    @pytest.mark.skip(reason="not yet implemented")
     def test_cannot_withdraw_more_than_balance(self) -> None:
         account = Account()
         account.deposit(100)

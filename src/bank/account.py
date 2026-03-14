@@ -32,7 +32,14 @@ class Account:
         self._transactions.append(Transaction(amount, TransactionType.DEPOSIT))
 
     def withdraw(self, amount: float) -> None:
-        raise NotImplementedError
+        if amount <= 0:
+            raise ValueError("Withdrawal amount must be positive.")
+        if amount > self.balance():
+            raise ValueError(
+                f"Insufficient funds: balance is {self.balance()}, "
+                f"attempted to withdraw {amount}."
+            )
+        self._transactions.append(Transaction(amount, TransactionType.WITHDRAWAL))
 
     def transfer(self, amount: float, target: Account) -> None:
         raise NotImplementedError
