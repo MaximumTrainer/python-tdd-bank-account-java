@@ -70,7 +70,6 @@ class TestBalanceSlip:
 
 
 class TestStatement:
-    @pytest.mark.skip(reason="not yet implemented")
     def test_statement_lists_all_transactions(self) -> None:
         account = Account()
         account.deposit(500)
@@ -79,7 +78,6 @@ class TestStatement:
         assert "DEPOSIT" in stmt
         assert "WITHDRAWAL" in stmt
 
-    @pytest.mark.skip(reason="not yet implemented")
     def test_statement_filter_deposits_only(self) -> None:
         account = Account()
         account.deposit(500)
@@ -88,7 +86,6 @@ class TestStatement:
         assert "DEPOSIT" in stmt
         assert "WITHDRAWAL" not in stmt
 
-    @pytest.mark.skip(reason="not yet implemented")
     def test_statement_filter_withdrawals_only(self) -> None:
         account = Account()
         account.deposit(500)

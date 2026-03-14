@@ -22,6 +22,14 @@ class Transaction:
         self.date: datetime = date or datetime.now()
 
 
+    def __str__(self) -> str:
+        return (
+            f"{self.date.strftime('%Y-%m-%d %H:%M:%S')} | "
+            f"{self.transaction_type.value:10} | "
+            f"{self.amount:>10.2f}"
+        )
+
+
 class Account:
     def __init__(self) -> None:
         self._transactions: List[Transaction] = []
@@ -64,4 +72,12 @@ class Account:
     def statement(
         self, filter_type: Optional[TransactionType] = None
     ) -> str:
-        raise NotImplementedError
+        header = f"{'Date/Time':<20} | {'Type':<10} | {'Amount':>10}"
+        separator = "-" * len(header)
+        lines = [header, separator]
+        for t in self._transactions:
+            if filter_type is None or t.transaction_type == filter_type:
+                lines.append(str(t))
+        lines.append(separator)
+        lines.append(f"{'Balance':>34}: {self.balance():>10.2f}")
+        return "\n".join(lines)
