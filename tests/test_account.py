@@ -38,7 +38,6 @@ class TestWithdraw:
 
 
 class TestTransfer:
-    @pytest.mark.skip(reason="not yet implemented")
     def test_transfer_moves_funds_between_accounts(self) -> None:
         source = Account()
         target = Account()
@@ -47,7 +46,6 @@ class TestTransfer:
         assert source.balance() == 125
         assert target.balance() == 75
 
-    @pytest.mark.skip(reason="not yet implemented")
     def test_transfer_fails_with_insufficient_funds(self) -> None:
         source = Account()
         target = Account()

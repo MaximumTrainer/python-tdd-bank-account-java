@@ -42,7 +42,8 @@ class Account:
         self._transactions.append(Transaction(amount, TransactionType.WITHDRAWAL))
 
     def transfer(self, amount: float, target: Account) -> None:
-        raise NotImplementedError
+        self.withdraw(amount)
+        target.deposit(amount)
 
     def balance(self) -> float:
         total = 0.0
