@@ -55,14 +55,12 @@ class TestTransfer:
 
 
 class TestBalanceSlip:
-    @pytest.mark.skip(reason="not yet implemented")
     def test_balance_slip_contains_balance(self) -> None:
         account = Account()
         account.deposit(250)
         slip = account.balance_slip()
         assert "250" in slip
 
-    @pytest.mark.skip(reason="not yet implemented")
     def test_balance_slip_contains_date(self) -> None:
         account = Account()
         account.deposit(100)

@@ -55,7 +55,11 @@ class Account:
         return total
 
     def balance_slip(self) -> str:
-        raise NotImplementedError
+        now = datetime.now()
+        return (
+            f"Date: {now.strftime('%Y-%m-%d %H:%M:%S')}\n"
+            f"Balance: {self.balance():.2f}"
+        )
 
     def statement(
         self, filter_type: Optional[TransactionType] = None
