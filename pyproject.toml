@@ -10,7 +10,7 @@ requires-python = ">=3.12"
 dependencies = []
 
 [project.optional-dependencies]
-dev = ["pytest>=8"]
+dev = ["pytest>=8", "mutmut>=2"]
 
 [tool.pytest.ini_options]
 testpaths = ["tests"]
@@ -18,3 +18,8 @@ pythonpath = ["src"]
 
 [tool.setuptools.packages.find]
 where = ["src"]
+
+[tool.mutmut]
+paths_to_mutate = "src/bank/"
+tests_dir = "tests/"
+runner = "python -m pytest -x --tb=no -q"

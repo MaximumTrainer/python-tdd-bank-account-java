@@ -128,3 +128,63 @@ Switch roles often!
 | `pytest -rs` | Show reasons for skipped tests |
 | `pytest solution/tests` | Run solution tests |
 | `pytest --tb=short` | Shorter tracebacks |
+
+---
+
+## Mutation Testing with mutmut
+
+[mutmut](https://github.com/boxed/mutmut) automatically introduces small code mutations (e.g. flipping `>` to `>=`, changing `+` to `-`) and checks whether your tests catch each one.  A surviving mutant means a test is missing or too weak.
+
+> **Windows note:** mutmut requires WSL on Windows.  Run all commands inside a WSL terminal.
+
+### Install
+
+```bash
+pip install -e ".[dev]"
+```
+
+### Run
+
+```bash
+# Run all mutations against all tests
+mutmut run
+
+# Quick run — stop on first surviving mutant
+mutmut run --use-coverage
+```
+
+### View results
+
+```bash
+# Summary: how many mutants killed vs survived
+mutmut results
+
+# Show the diff for all surviving mutants
+mutmut show
+
+# Show a specific surviving mutant by ID
+mutmut show 42
+
+# HTML report (opens in browser)
+mutmut html
+```
+
+### Configuration
+
+mutmut is pre-configured in `pyproject.toml`:
+
+```toml
+[tool.mutmut]
+paths_to_mutate = "src/bank/"   # only mutate domain code
+tests_dir       = "tests/"
+runner          = "python -m pytest -x --tb=no -q"
+```
+
+### Interpreting output
+
+| Status | Meaning |
+|--------|---------|
+| `killed` | ✅ A test caught the mutation — good coverage |
+| `survived` | ❌ No test caught it — consider adding an assertion |
+| `suspicious` | ⚠️ Test suite timed out or behaved unexpectedly |
+| `skipped` | Mutation was not applied (e.g. string/comment changes) |
