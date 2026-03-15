@@ -35,4 +35,4 @@ class AccountBuilder:
 
     def build(self) -> Account:
         from bank.account import Account
-        return Account(self._log)
+        return Account(TransactionLog(list(self._log)))
