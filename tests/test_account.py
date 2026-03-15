@@ -7,7 +7,8 @@ to turn it green, then refactor — classic Red → Green → Refactor.
 
 import pytest
 
-from bank.account import Account, TransactionType
+from bank.account import Account
+from bank.transaction_type import TransactionType
 
 
 class TestDeposit:
